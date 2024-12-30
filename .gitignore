@@ -135,6 +135,11 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+environ.py
+
+# Models
+yolo11s.pt
+yolo11x.pt
 
 # Spyder project settings
 .spyderproject
