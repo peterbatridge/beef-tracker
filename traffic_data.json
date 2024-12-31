@@ -1,0 +1,20 @@
+[
+  {
+    "from_timestamp": "2024-12-31T03:49:20-06:00",
+    "to_timestamp": "2024-12-31T04:04:20-06:00",
+    "counts": {
+      "people": 223,
+      "cyclists": 0,
+      "northbound_traffic": 17,
+      "southbound_traffic": 25,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 40.57,
+      "feels_like": 30.78,
+      "main": "Rain",
+      "description": "light rain",
+      "humidity": 91
+    }
+  }
+]
