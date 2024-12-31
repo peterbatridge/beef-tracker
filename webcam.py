@@ -73,7 +73,6 @@ def commit_and_push_to_github(filename):
 def save_data_to_json():
     global from_time_str, counters
 
-    # Use timezone-aware datetime for `to_timestamp`
     current_time = datetime.now(chicago_tz).replace(microsecond=0)
     to_time_str = current_time.isoformat()
 
