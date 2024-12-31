@@ -138,8 +138,10 @@ venv.bak/
 environ.py
 
 # Models
-yolo11s.pt
 yolo11x.pt
+yolo11s.pt
+yolo11m.pt
+yolo11l.pt
 
 # Spyder project settings
 .spyderproject
