@@ -6,7 +6,9 @@ from datetime import datetime, timedelta, timezone
 import os
 from ultralytics import YOLO
 import requests
-# from environ import weather_api_key, location  # adjust as needed
+import keyboard
+from zoneinfo import ZoneInfo
+from environ import weather_api_key, location
 
 tracked_objects = {}
 
@@ -28,23 +30,35 @@ counters = {
 
 LINGER_THRESHOLD_FRAMES = 30
 LINGER_DISTANCE_THRESHOLD = 40  
-VEHICLE_MOVE_THRESHOLD = 40  # pixels
+VEHICLE_MOVE_THRESHOLD = 40
+chicago_tz = ZoneInfo("America/Chicago")
 
-### Replace `datetime.utcnow()` with timezone-aware calls ###
-from_time = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
-next_save_time = from_time + timedelta(hours=1)
+from_time = datetime.now(chicago_tz).replace(microsecond=0)
+next_save_time = from_time + timedelta(minutes=15)
 from_time_str = from_time.isoformat()
 
 def get_current_weather():
-    """Replace this stub with your real logic."""
-    # Example stub:
-    return {
-        'temp': 72,
-        'feels_like': 72,
-        'main': 'Clear',
-        'description': 'clear sky',
-        'humidity': 40,
-    }
+    response = requests.get(
+        f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={weather_api_key}&units=imperial"
+    )
+    weather_data = response.json()
+    if weather_data.get('cod') == 200:
+        return {
+            'temp': weather_data["main"]["temp"],
+            'feels_like': weather_data["main"]["feels_like"],
+            'main': weather_data["weather"][0]["main"],
+            'description': weather_data["weather"][0]["description"],
+            'humidity': weather_data["main"]["humidity"],
+        }
+    else:
+        print("FAILED:", weather_data)
+        return {
+            'temp': 0.0,
+            'feels_like': 0.0,
+            'main': '',
+            'description': '',
+            'humidity': 0,
+        }
 
 def commit_and_push_to_github(filename):
     try:
@@ -60,16 +74,14 @@ def save_data_to_json():
     global from_time_str, counters
 
     # Use timezone-aware datetime for `to_timestamp`
-    current_time = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
+    current_time = datetime.now(chicago_tz).replace(microsecond=0)
     to_time_str = current_time.isoformat()
-
-    w = get_current_weather()
 
     new_entry = {
         "from_timestamp": from_time_str,
         "to_timestamp": to_time_str,
         "counts": dict(counters),
-        "weather": w
+        "weather": current_weather
     }
 
     data_file = "traffic_data.json"
@@ -77,8 +89,11 @@ def save_data_to_json():
         with open(data_file, "w") as f:
             json.dump([new_entry], f, indent=2)
     else:
-        with open(data_file, "r") as f:
-            existing_data = json.load(f)
+        if os.path.getsize(data_file) == 0:
+            existing_data = []
+        else:
+            with open(data_file, "r") as f:
+                existing_data = json.load(f)
         existing_data.append(new_entry)
         with open(data_file, "w") as f:
             json.dump(existing_data, f, indent=2)
@@ -105,7 +120,7 @@ def finalize_track(track_data):
         last_y = positions[-1][1]
         delta_y = last_y - first_y
         if abs(delta_y) < VEHICLE_MOVE_THRESHOLD:
-            # Do nothing — consider it parked
+            # Do nothing, consider it parked
             pass
         elif last_y < first_y:
             counters['northbound_traffic'] += 1
@@ -116,37 +131,31 @@ cap = cv2.VideoCapture(1)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 2560)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1920)
 
-model = YOLO("yolo11s.pt")
-
+model = YOLO("yolo11m.pt")
+current_weather = get_current_weather()
 while cap.isOpened():
     success, frame = cap.read()
     if not success:
         break
 
-    now_utc = datetime.now(timezone.utc)
+    now_utc = datetime.now(chicago_tz)
     if now_utc >= next_save_time:
         save_data_to_json()
         for k in counters:
             counters[k] = 0
-        from_time = now_utc.replace(minute=0, second=0, microsecond=0)
+        from_time = now_utc.replace(microsecond=0)
         from_time_str = from_time.isoformat()
         current_weather = get_current_weather()
+        next_save_time = from_time + timedelta(minutes=15)
 
-        # Next hour
-        next_save_time = from_time + timedelta(hours=1)
-
-    # 2) Tracking with YOLO
-    results = model.track(frame, iou=0.3, persist=True)
-
-    # Avoid ambiguous boolean checks:
-    # Instead of `if not results[0].boxes.id:`, check shape or None
+    results = model.track(frame, iou=0.3, persist=True, verbose=False)
     if (
         not results or 
         results[0].boxes is None or 
         results[0].boxes.id is None or 
         results[0].boxes.id.shape[0] == 0
     ):
-        cv2.imshow("YOLO Tracking", frame)
+        #cv2.imshow("YOLO Tracking", frame)
         if cv2.waitKey(1) & 0xFF == ord("q"):
             break
         continue
@@ -155,7 +164,7 @@ while cap.isOpened():
     track_ids = results[0].boxes.id.cpu().numpy()
     class_ids = results[0].boxes.cls.cpu().numpy()
 
-    annotated_frame = results[0].plot()
+    #annotated_frame = results[0].plot()
     current_ids = set()
 
     for i, box in enumerate(xywh):
@@ -181,10 +190,10 @@ while cap.isOpened():
         finalize_track(tracked_objects[tid])
         del tracked_objects[tid]
 
-    cv2.imshow("YOLO Tracking", annotated_frame)
-    if cv2.waitKey(1) & 0xFF == ord("i"):
+    #cv2.imshow("YOLO Tracking", annotated_frame)
+    if keyboard.is_pressed('i'):
         print(counters)
-    if cv2.waitKey(1) & 0xFF == ord("q"):
+    elif keyboard.is_pressed('q'):
         break
 
 cap.release()
