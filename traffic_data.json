@@ -430,5 +430,23 @@
       "description": "moderate rain",
       "humidity": 92
     }
+  },
+  {
+    "from_timestamp": "2024-12-31T09:49:20-06:00",
+    "to_timestamp": "2024-12-31T10:04:20-06:00",
+    "counts": {
+      "people": 1412,
+      "cyclists": 0,
+      "northbound_traffic": 281,
+      "southbound_traffic": 157,
+      "people_lingering": 5
+    },
+    "weather": {
+      "temp": 38.01,
+      "feels_like": 28.29,
+      "main": "Rain",
+      "description": "moderate rain",
+      "humidity": 92
+    }
   }
 ]
