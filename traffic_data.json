@@ -1,0 +1,20 @@
+[
+  {
+    "from_timestamp": "2025-01-06T15:31:40-06:00",
+    "to_timestamp": "2025-01-06T15:46:40-06:00",
+    "counts": {
+      "people": 9,
+      "cyclists": 0,
+      "northbound_traffic": 106,
+      "southbound_traffic": 73,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 28.76,
+      "feels_like": 17.46,
+      "main": "Mist",
+      "description": "mist",
+      "humidity": 90
+    }
+  }
+]
