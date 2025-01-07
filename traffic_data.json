@@ -1852,5 +1852,23 @@
       "description": "overcast clouds",
       "humidity": 70
     }
+  },
+  {
+    "from_timestamp": "2025-01-07T17:16:40-06:00",
+    "to_timestamp": "2025-01-07T17:31:40-06:00",
+    "counts": {
+      "people": 8,
+      "cyclists": 0,
+      "northbound_traffic": 167,
+      "southbound_traffic": 82,
+      "people_lingering": 1
+    },
+    "weather": {
+      "temp": 24.15,
+      "feels_like": 17.11,
+      "main": "Clouds",
+      "description": "broken clouds",
+      "humidity": 70
+    }
   }
 ]
