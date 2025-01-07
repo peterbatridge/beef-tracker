@@ -664,5 +664,23 @@
       "description": "scattered clouds",
       "humidity": 76
     }
+  },
+  {
+    "from_timestamp": "2025-01-07T00:46:40-06:00",
+    "to_timestamp": "2025-01-07T01:01:40-06:00",
+    "counts": {
+      "people": 0,
+      "cyclists": 0,
+      "northbound_traffic": 9,
+      "southbound_traffic": 2,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 23.02,
+      "feels_like": 13.91,
+      "main": "Clouds",
+      "description": "scattered clouds",
+      "humidity": 77
+    }
   }
 ]
