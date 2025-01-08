@@ -3202,5 +3202,23 @@
       "description": "scattered clouds",
       "humidity": 61
     }
+  },
+  {
+    "from_timestamp": "2025-01-08T12:01:40-06:00",
+    "to_timestamp": "2025-01-08T12:16:40-06:00",
+    "counts": {
+      "people": 48,
+      "cyclists": 0,
+      "northbound_traffic": 106,
+      "southbound_traffic": 92,
+      "people_lingering": 25
+    },
+    "weather": {
+      "temp": 25.25,
+      "feels_like": 20.28,
+      "main": "Clear",
+      "description": "clear sky",
+      "humidity": 62
+    }
   }
 ]
