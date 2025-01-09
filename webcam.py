@@ -90,7 +90,7 @@ def save_data_to_json():
         "weather": current_weather
     }
 
-    data_file = "traffic_data.json"
+    data_file = "public/traffic_data.json"
     if not os.path.exists(data_file):
         with open(data_file, "w") as f:
             json.dump([new_entry], f, indent=2)
