@@ -45,27 +45,38 @@ def is_in_doorway(x, y):
     return (x1 <= x <= x2) and (y1 <= y <= y2)
 
 def get_current_weather():
-    response = requests.get(
-        f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={weather_api_key}&units=imperial"
-    )
-    weather_data = response.json()
-    if weather_data.get('cod') == 200:
-        return {
-            'temp': weather_data["main"]["temp"],
-            'feels_like': weather_data["main"]["feels_like"],
-            'main': weather_data["weather"][0]["main"],
-            'description': weather_data["weather"][0]["description"],
-            'humidity': weather_data["main"]["humidity"],
-        }
-    else:
-        print("FAILED:", weather_data)
+    try:
+        response = requests.get(
+            f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={weather_api_key}&units=imperial"
+        )
+        weather_data = response.json()
+        if weather_data.get('cod') == 200:
+            return {
+                'temp': weather_data["main"]["temp"],
+                'feels_like': weather_data["main"]["feels_like"],
+                'main': weather_data["weather"][0]["main"],
+                'description': weather_data["weather"][0]["description"],
+                'humidity': weather_data["main"]["humidity"],
+            }
+        else:
+            print("FAILED:", weather_data)
+            return {
+                'temp': 0.0,
+                'feels_like': 0.0,
+                'main': '',
+            'description': 'failed to get weather data',
+                'humidity': 0,
+            }
+    except Exception as e:
+        print(e)
         return {
             'temp': 0.0,
             'feels_like': 0.0,
             'main': '',
-            'description': '',
+            'description': 'failed to get weather data',
             'humidity': 0,
         }
+
 
 def commit_and_push_to_github(filename):
     try:
