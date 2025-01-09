@@ -210,7 +210,8 @@
             return `${hours}:${minutes} ${ampm} on ${formattedDate}`;
         }
         async function loadTrafficData() {
-            const response = await fetch('traffic_data.json');
+            const url = `traffic_data.json?nocache=${Date.now()}`;
+            const response = await fetch(url);
             const data = await response.json();
             const latest = data[data.length - 1];
             const formattedTimestamp = formatTimestamp(latest.to_timestamp);
