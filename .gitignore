@@ -142,6 +142,7 @@ yolo11x.pt
 yolo11s.pt
 yolo11m.pt
 yolo11l.pt
+serviceAccountKey.json
 
 .firebase/
 

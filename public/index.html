@@ -121,6 +121,11 @@
     </style>
 </head>
 <body>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js'
+        import { getAuth } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js'
+        import { getFirestore } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js'
+      </script>
     <div id="background"></div>
     <h1>
         BEEF-O-METER
@@ -136,6 +141,16 @@
     <div id="foreground"></div>
 
     <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyD6oI_2bvTBbCxUOoZJFYHyynHWwm64k9c",
+            authDomain: "beef-adab1.firebaseapp.com",
+            projectId: "beef-adab1",
+            storageBucket: "beef-adab1.firebasestorage.app",
+            messagingSenderId: "632504499644",
+            appId: "1:632504499644:web:d005cb397301a01288ffb9",
+            measurementId: "G-VY84JNBT70"
+        };
+        const app = initializeApp(firebaseConfig);
         const beefyBtn = document.getElementById('feelingBeefy');
         beefyBtn.addEventListener('click', () => {
             const beefImg = document.createElement('img');
@@ -211,7 +226,7 @@
             return `${hours}:${minutes} ${ampm} on ${formattedDate}`;
         }
         async function loadTrafficData() {
-            const url = `traffic_data.json?nocache=${Date.now()}`;
+            const url = `traffic_data.json`;
             const response = await fetch(url);
             const data = await response.json();
             const latest = data[data.length - 1];

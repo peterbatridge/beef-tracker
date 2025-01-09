@@ -9,6 +9,12 @@ import requests
 import keyboard
 from zoneinfo import ZoneInfo
 from environ import weather_api_key, location
+from google.cloud import firestore
+import firebase_admin
+from firebase_admin import credentials
+
+cred = credentials.Certificate("serviceAccountKey.json")
+firebase_admin.initialize_app(cred)
 
 tracked_objects = {}
 lost_tracks = {}
@@ -35,6 +41,7 @@ LINGER_THRESHOLD_FRAMES = 30
 LINGER_DISTANCE_THRESHOLD = 40  
 VEHICLE_MOVE_THRESHOLD = 40
 chicago_tz = ZoneInfo("America/Chicago")
+db = firestore.Client()
 
 from_time = datetime.now(chicago_tz).replace(microsecond=0)
 next_save_time = from_time + timedelta(minutes=15)
@@ -88,19 +95,19 @@ def commit_and_push_to_github(filename):
     except Exception as e:
         print("Error pushing to GitHub:", e)
 
-def save_data_to_json():
+def build_data_entry():
     global from_time_str, counters
-
     current_time = datetime.now(chicago_tz).replace(microsecond=0)
     to_time_str = current_time.isoformat()
-
     new_entry = {
         "from_timestamp": from_time_str,
         "to_timestamp": to_time_str,
         "counts": dict(counters),
         "weather": current_weather
     }
+    return new_entry
 
+def save_data_to_json(new_entry):
     data_file = "public/traffic_data.json"
     if not os.path.exists(data_file):
         with open(data_file, "w") as f:
@@ -116,6 +123,13 @@ def save_data_to_json():
             json.dump(existing_data, f, indent=2)
 
     commit_and_push_to_github(data_file)
+
+def store_data_in_firestore(new_entry):
+    try:
+        db.collection("traffic-data").document().set(new_entry)
+        print("Data stored in Firestore.")
+    except Exception as e:
+        print("Error writing to Firestore:", e)
 
 def finalize_track(track_data):
     label = track_data['label']
@@ -159,7 +173,9 @@ while cap.isOpened():
 
     now_local = datetime.now(chicago_tz)
     if now_local >= next_save_time:
-        save_data_to_json()
+        new_entry = build_data_entry()
+        store_data_in_firestore(new_entry)
+        save_data_to_json(new_entry)
         for k in counters:
             counters[k] = 0
         from_time = now_local.replace(microsecond=0)
