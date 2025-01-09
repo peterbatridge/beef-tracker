@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beef Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment-timezone@0.5.31/builds/moment-timezone-with-data.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0/dist/chartjs-adapter-moment.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -16,11 +20,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
+            justify-content: flex-start;
+            overflow-x: hidden;
+            overflow-y: auto;
             background: black;
             color: white;
+            position: relative;
         }
 
         #background, #foreground {
@@ -46,49 +51,254 @@
         }
 
         h1 {
-            position: absolute;
-            top: 20px;
-            text-align: center;
-            width: 100%;
+            margin: 20px 0;
             font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
         }
 
         #content {
-            margin-top: 80px;
+            width: 80%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #graph {
             width: 80%;
             height: 300px;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 0;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
         }
 
-        #graph {
-            margin-top: 20px;
-            width: 80%;
-            height: 300px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            z-index: 0;
+        .highlight {
+            font-weight: bold;
         }
+            /* Button styling */
+    #feelingBeefy {
+      padding: 10px 20px;
+      border: none;
+      background: #ff006e;
+      color: #fff;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    #feelingBeefy:hover {
+      background: #f72585;
+    }
+
+    #jawImg {
+        position: absolute;
+        top: 0;
+        right: -50px;
+        max-height: 200%;
+        width: auto;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    .rotate {
+      animation: spin 1s linear;
+    }
     </style>
 </head>
 <body>
     <div id="background"></div>
-    <h1>BEEF TRACKER</h1>
-    <div id="content">How much beef can you eat?</div>
-    <div id="graph"></div>
+    <h1>
+        BEEF-O-METER
+        <img id="jawImg" src="" alt="jaw image" />
+    </h1>
+    <img id="jawImg" src="" alt="jaw image" style="display: none;" />
+    <div id="content">How much beef can you eat?
+        <button id="feelingBeefy">I'm Feeling Beefy</button>
+    </div>
+    <div id="graph">
+        <canvas id="trafficChart"></canvas>
+    </div>
     <div id="foreground"></div>
 
     <script>
+        const beefyBtn = document.getElementById('feelingBeefy');
+        beefyBtn.addEventListener('click', () => {
+            const beefImg = document.createElement('img');
+            beefImg.src = 'italianbeef.png';
+            beefImg.alt = 'Italian Beef';
+            beefImg.classList.add('rotate');
+            beefyBtn.replaceWith(beefImg);
+        });
+
+        function decideJawImage(latest) {
+        const nowChicago = moment().tz("America/Chicago");
+        const day = nowChicago.day();
+        const hour = nowChicago.hour();
+        const people = latest.counts.people;
+        const inRange = (day >= 1 && day <= 6 && hour >= 10 && hour < 16);
+        let jawSrc = '';
+        if (!inRange || people > 200) {
+            jawSrc = 'jawbad.png';
+        } else if (people > 75 && people <= 200) {
+            jawSrc = 'jawokay.png';
+        } else {
+            jawSrc = 'jawgood.png';
+        }
+
+        const jawImg = document.getElementById('jawImg');
+        if (jawSrc) {
+            jawImg.src = jawSrc;
+            jawImg.style.display = 'block';
+        } else {
+            jawImg.style.display = 'none';
+        }
+        }
+
+        function addZeroDataPointAtNearestSixHour(data) {
+            const earliestTimestamp = data[0].from_timestamp;
+            const earliestDate = new Date(earliestTimestamp);
+
+            const roundedDate = new Date(earliestDate);
+            const currentHour = roundedDate.getHours();
+            const newHourMultiple = Math.floor(currentHour / 6) * 6; // e.g. 1.7 => 1, then *6 => 6
+            roundedDate.setHours(newHourMultiple, 0, 0, 0);
+
+            if (roundedDate < earliestDate) {
+                const zeroPoint = {
+                from_timestamp: roundedDate.toISOString(),
+                to_timestamp: roundedDate.toISOString(),
+                counts: {
+                    people: 0,
+                    people_lingering: 0,
+                    cyclists: 0,
+                    northbound_traffic: 0,
+                    southbound_traffic: 0
+                },
+                weather: {
+                    main: 'N/A',
+                    description: 'No data',
+                    temp: 0,
+                    feels_like: 0,
+                    humidity: 0
+                }
+                };
+
+                data.unshift(zeroPoint);
+            }
+        }
+
+        function formatTimestamp(timestamp) {
+            const date = new Date(timestamp);
+            const hours = date.getHours() % 12 || 12;
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            const ampm = date.getHours() >= 12 ? 'PM' : 'AM';
+            const formattedDate = date.toLocaleDateString();
+            return `${hours}:${minutes} ${ampm} on ${formattedDate}`;
+        }
+        async function loadTrafficData() {
+            const response = await fetch('traffic_data.json');
+            const data = await response.json();
+            const latest = data[data.length - 1];
+            const formattedTimestamp = formatTimestamp(latest.to_timestamp);
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = `
+                <h2>Last 15 minutes as of <span class="highlight">${formattedTimestamp}</span></h2>
+                <p><span class="highlight">People:</span> ${latest.counts.people}</p>
+                <p><span class="highlight">People Lingering:</span> ${latest.counts.people_lingering}</p>
+                <p><span class="highlight">Cyclists:</span> ${latest.counts.cyclists}</p>
+                <p><span class="highlight">Northbound Traffic:</span> ${latest.counts.northbound_traffic}</p>
+                <p><span class="highlight">Southbound Traffic:</span> ${latest.counts.southbound_traffic}</p>
+                <p><span class="highlight">Weather:</span> ${latest.weather.main} (${latest.weather.description}), ${latest.weather.temp}°F (Feels like: ${latest.weather.feels_like}°F), Humidity: ${latest.weather.humidity}%</p>
+            `;
+            const beefyBtnHtml = `<button id="feelingBeefy">I'm Feeling Beefy</button>`;
+            contentDiv.insertAdjacentHTML('beforeend', beefyBtnHtml);
+
+            // Re-attach the beefy button event listener
+            document.getElementById('feelingBeefy').addEventListener('click', () => {
+                const beefImg = document.createElement('img');
+                beefImg.src = 'italianbeef.png';
+                beefImg.alt = 'Italian Beef';
+                beefImg.classList.add('rotate');
+                document.getElementById('feelingBeefy').replaceWith(beefImg);
+            });
+
+            decideJawImage(latest);
+            addZeroDataPointAtNearestSixHour(data);
+
+            const ctx = document.getElementById('trafficChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Cyclists',
+                            data: data.map(entry => ({ x: new Date(entry.from_timestamp), y: entry.counts.cyclists })),
+                            backgroundColor: 'rgba(255, 99, 132, 0.8)'
+                        },
+                        {
+                            label: 'People',
+                            data: data.map(entry => ({ x: new Date(entry.from_timestamp), y: entry.counts.people })),
+                            backgroundColor: 'rgba(54, 162, 235, 0.8)'
+                        },
+                        {
+                            label: 'Northbound Traffic',
+                            data: data.map(entry => ({ x: new Date(entry.from_timestamp), y: entry.counts.northbound_traffic })),
+                            backgroundColor: 'rgba(255, 206, 86, 0.8)'
+                        },
+                        {
+                            label: 'Southbound Traffic',
+                            data: data.map(entry => ({ x: new Date(entry.from_timestamp), y: entry.counts.southbound_traffic })),
+                            backgroundColor: 'rgba(75, 192, 192, 0.8)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: true },
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            stacked: true,
+                            time: {
+                                unit: 'hour',
+                                stepSize: 6,                                
+                                displayFormats: {
+                                    hour: 'MMM D ha'
+                                }
+                            }
+                        },
+                        y: { stacked: true, beginAtZero: true }
+                    }
+                }
+            });
+        }
+
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const foreground = document.getElementById('foreground');
                 foreground.style.opacity = '1';
-            }, 5000); // 5 seconds
+            }, 3000);
         });
+
+        loadTrafficData();
+
+
     </script>
 </body>
 </html>
