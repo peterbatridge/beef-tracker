@@ -143,6 +143,8 @@ yolo11s.pt
 yolo11m.pt
 yolo11l.pt
 
+.firebase/
+
 # Spyder project settings
 .spyderproject
 .spyproject
