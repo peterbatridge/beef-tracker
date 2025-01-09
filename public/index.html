@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment-timezone@0.5.31/builds/moment-timezone-with-data.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.1.1/dist/chartjs-plugin-annotation.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0/dist/chartjs-adapter-moment.min.js"></script>
     <style>
         * {
@@ -239,6 +240,22 @@
 
             decideJawImage(latest);
             addZeroDataPointAtNearestSixHour(data);
+            const annotationObjects = {};
+            for (let i = 0; i < data.length - 1; i++) {
+                const currentTime = new Date(data[i].to_timestamp).getTime();
+                const nextTime = new Date(data[i+1].from_timestamp).getTime();
+                // If gap > 20 minutes (some threshold bigger than normal 15 min interval):
+                if ((nextTime - currentTime) > 1 * 60_000) {
+                    annotationObjects[`missingData${i}`] = {
+                    type: 'box',
+                    xMin: data[i].to_timestamp,
+                    xMax: data[i+1].from_timestamp,
+                    yMin: 0,
+                    yMax: 'max',
+                    backgroundColor: 'rgba(128,128,128,0.2)'
+                    };
+                }
+            }
 
             const ctx = document.getElementById('trafficChart').getContext('2d');
             new Chart(ctx, {
@@ -270,6 +287,9 @@
                 options: {
                     responsive: true,
                     plugins: {
+                        annotation: {
+                            annotations: annotationObjects
+                        },
                         legend: { display: true },
                     },
                     scales: {
@@ -286,7 +306,8 @@
                         },
                         y: { stacked: true, beginAtZero: true }
                     }
-                }
+                },
+                plugins: [ChartAnnotationPlugin]
             });
         }
 
