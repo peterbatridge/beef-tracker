@@ -14,7 +14,7 @@ tracked_objects = {}
 lost_tracks = {}
 LOST_TRACK_THRESHOLD = 10
 DOORWAY_REGION = (1100, 175, 1250, 325)  
-DOORWAY_FRAMES_UNTIL_FINALIZED = 75000 # This should be over 20 minutes
+DOORWAY_FRAMES_UNTIL_FINALIZED = 18000 # ~5mins
 current_weather = {
     'temp': 0.0,
     'feels_like': 0.0,
