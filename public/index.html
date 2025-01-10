@@ -43,11 +43,11 @@
         }
 
         #background {
-            background-image: url('beef.png');
+            background-image: url('beef.webp');
         }
 
         #foreground {
-            background-image: url('beefannotated.png');
+            background-image: url('beefannotated.webp');
             opacity: 0;
         }
 
@@ -121,11 +121,6 @@
     </style>
 </head>
 <body>
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js'
-        import { getAuth } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js'
-        import { getFirestore } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js'
-      </script>
     <div id="background"></div>
     <h1>
         BEEF-O-METER
@@ -140,7 +135,10 @@
     </div>
     <div id="foreground"></div>
 
-    <script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js'
+        import { getAuth } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js'
+        import { getFirestore } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js'
         const firebaseConfig = {
             apiKey: "AIzaSyD6oI_2bvTBbCxUOoZJFYHyynHWwm64k9c",
             authDomain: "beef-adab1.firebaseapp.com",
@@ -154,7 +152,7 @@
         const beefyBtn = document.getElementById('feelingBeefy');
         beefyBtn.addEventListener('click', () => {
             const beefImg = document.createElement('img');
-            beefImg.src = 'italianbeef.png';
+            beefImg.src = 'italianbeef.webp';
             beefImg.alt = 'Italian Beef';
             beefImg.classList.add('rotate');
             beefyBtn.replaceWith(beefImg);
@@ -168,11 +166,11 @@
         const inRange = (day >= 1 && day <= 6 && hour >= 10 && hour < 16);
         let jawSrc = '';
         if (!inRange || people > 200) {
-            jawSrc = 'jawbad.png';
+            jawSrc = 'jawbad.webp';
         } else if (people > 75 && people <= 200) {
-            jawSrc = 'jawokay.png';
+            jawSrc = 'jawokay.webp';
         } else {
-            jawSrc = 'jawgood.png';
+            jawSrc = 'jawgood.webp';
         }
 
         const jawImg = document.getElementById('jawImg');
@@ -247,7 +245,7 @@
             // Re-attach the beefy button event listener
             document.getElementById('feelingBeefy').addEventListener('click', () => {
                 const beefImg = document.createElement('img');
-                beefImg.src = 'italianbeef.png';
+                beefImg.src = 'italianbeef.webp';
                 beefImg.alt = 'Italian Beef';
                 beefImg.classList.add('rotate');
                 document.getElementById('feelingBeefy').replaceWith(beefImg);

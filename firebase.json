@@ -4,7 +4,9 @@
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "public/traffic_data.json",
+      "traffic_data.json"
     ],
     "headers": [
       {
