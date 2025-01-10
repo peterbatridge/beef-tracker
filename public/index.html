@@ -225,7 +225,7 @@
             const formattedDate = date.toLocaleDateString();
             return `${hours}:${minutes} ${ampm} on ${formattedDate}`;
         }
-        async function loadTrafficDataFromFirestore() {
+        async function loadTrafficData() {
             // Build a query on the "traffic_data" collection, e.g. sorted by from_timestamp ascending
             const q = query(collection(db, "traffic-data"), orderBy("from_timestamp"));
             const snapshot = await getDocs(q);
