@@ -1,27 +1,24 @@
 import json
-from google.cloud import firestore
 import firebase_admin
 from firebase_admin import credentials
-
-cred = credentials.Certificate("serviceAccountKey.json")
+from firebase_admin import firestore
+# Use the service account key file directly.
+cred = credentials.Certificate("serviceAccountKey.json") 
 firebase_admin.initialize_app(cred)
-
-# Make sure to set GOOGLE_APPLICATION_CREDENTIALS to your Firestore service account JSON.
-# Example:
-# export GOOGLE_APPLICATION_CREDENTIALS="/path/to/serviceAccountKey.json"
 
 def load_json_to_firestore(json_file_path):
     """
     Reads traffic_data.json and inserts each entry into Firestore.
     Ensures no duplicates by checking for existing `from_timestamp` and `to_timestamp`.
     """
+
     # Initialize Firestore
-    db = firestore.Client()
-    collection_ref = db.collection("traffic_data")
+    db = firestore.client()  # Remove project ID to use credentials from the certificate.
+    collection_ref = db.collection("traffic-data")
 
     # Read the JSON file
     with open(json_file_path, "r") as f:
-        data = json.load(f)  # data is a list of objects
+        data = json.load(f)
 
     for entry in data:
         from_timestamp = entry["from_timestamp"]
@@ -31,8 +28,8 @@ def load_json_to_firestore(json_file_path):
         existing_docs = collection_ref.where("from_timestamp", "==", from_timestamp).where("to_timestamp", "==", to_timestamp).stream()
 
         # If no matching documents are found, insert the new entry
-        if not any(existing_docs):  # Check if the query result is empty
-            collection_ref.add(entry)  # Add the document to the collection
+        if not any(existing_docs):
+            collection_ref.add(entry)
             print(f"Inserted entry: {from_timestamp} - {to_timestamp}")
         else:
             print(f"Skipped duplicate entry: {from_timestamp} - {to_timestamp}")
