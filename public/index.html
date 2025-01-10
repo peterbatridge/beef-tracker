@@ -226,21 +226,16 @@
             return `${hours}:${minutes} ${ampm} on ${formattedDate}`;
         }
         async function loadTrafficData() {
-            // Build a query on the "traffic_data" collection, e.g. sorted by from_timestamp ascending
-            
-            const latestEntryQuery = query(collection(db, "traffic-data"), orderBy("to_timestamp", "desc"), limit(1));
-            const latestEntrySnapshot = await getDocs(latestEntryQuery);
-            const latest= latestEntrySnapshot.docs[0]?.data();
-            
             const q = query(
                 collection(db, "traffic-data"),
-                select("from_timestamp", "to_timestamp", "counts"),
                 orderBy("from_timestamp")
             )
             const snapshot = await getDocs(q);
             
             // Convert docs => array of pure JS objects
             const data = snapshot.docs.map(doc => doc.data());
+            const latest= data[data.length - 1];
+
             //const url = `traffic_data.json`;
             //const response = await fetch(url);
             //const data = await response.json();
