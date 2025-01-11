@@ -8008,5 +8008,23 @@
       "description": "broken clouds",
       "humidity": 75
     }
+  },
+  {
+    "from_timestamp": "2025-01-11T12:19:47-06:00",
+    "to_timestamp": "2025-01-11T12:34:47-06:00",
+    "counts": {
+      "people": 38,
+      "cyclists": 7,
+      "northbound_traffic": 144,
+      "southbound_traffic": 92,
+      "people_lingering": 9
+    },
+    "weather": {
+      "temp": 32.88,
+      "feels_like": 25.23,
+      "main": "Snow",
+      "description": "snow",
+      "humidity": 74
+    }
   }
 ]
