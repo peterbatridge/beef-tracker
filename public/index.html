@@ -248,6 +248,7 @@
             for (let i = 0; i < data.length - 1; i++) {
                 const currentTime = new Date(data[i].to_timestamp).getTime();
                 const nextTime = new Date(data[i+1].from_timestamp).getTime();
+                console.log(i, nextTime, currentTime, nextTime - currentTime);
                 if ((nextTime - currentTime) > 1 * 60_000) {
                     annotationObjects[`missingData${i}`] = {
                     type: 'box',
