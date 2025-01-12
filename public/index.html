@@ -245,15 +245,15 @@
             decideJawImage(latest);
             addZeroDataPointAtNearestSixHour(data);
             const annotationObjects = {};
-            for (let i = 0; i < data.length - 1; i++) {
+            for (let i = 1; i < data.length; i++) {
                 const currentTime = new Date(data[i].to_timestamp).getTime();
-                const nextTime = new Date(data[i+1].from_timestamp).getTime();
-                console.log(i, nextTime, currentTime, nextTime - currentTime);
-                if ((nextTime - currentTime) > 1 * 60_000) {
+                const previousTime = new Date(data[i-1].from_timestamp).getTime();
+                const gap = currentTime - previousTime;
+                if (gap > 5 * 60_000) {
                     annotationObjects[`missingData${i}`] = {
                     type: 'box',
-                    xMin: data[i].to_timestamp,
-                    xMax: data[i+1].from_timestamp,
+                    xMin: data[i-1].from_timestamp, 
+                    xMax: data[i].to_timestamp,
                     yMin: 0,
                     yMax: 'max',
                     backgroundColor: 'rgba(128,128,128,0.2)'
