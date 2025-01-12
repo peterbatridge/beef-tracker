@@ -8,6 +8,16 @@
       "public/traffic_data.json",
       "traffic_data.json"
     ],
+    "rewrites": [
+      {
+        "source": "/beef/latest",
+        "function": "beef_latest"
+      },
+      {
+        "source": "/beef/counts",
+        "function": "beef_counts"
+      }
+    ],
     "headers": [
       {
         "source": "traffic_data.json",

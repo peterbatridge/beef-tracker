@@ -136,21 +136,6 @@
     <div id="foreground"></div>
 
     <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js'
-        import { getAuth } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js'
-        import { getFirestore, collection, query, orderBy, getDocs, limit } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js'
-        const firebaseConfig = {
-            apiKey: "AIzaSyD6oI_2bvTBbCxUOoZJFYHyynHWwm64k9c",
-            authDomain: "beef-adab1.firebaseapp.com",
-            projectId: "beef-adab1",
-            storageBucket: "beef-adab1.firebasestorage.app",
-            messagingSenderId: "632504499644",
-            appId: "1:632504499644:web:d005cb397301a01288ffb9",
-            measurementId: "G-VY84JNBT70"
-        };
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
         const beefyBtn = document.getElementById('feelingBeefy');
         beefyBtn.addEventListener('click', () => {
             const beefImg = document.createElement('img');
@@ -226,19 +211,14 @@
             return `${hours}:${minutes} ${ampm} on ${formattedDate}`;
         }
         async function loadTrafficData() {
-            const q = query(
-                collection(db, "traffic-data"),
-                orderBy("from_timestamp")
-            )
-            const snapshot = await getDocs(q);
-            
-            // Convert docs => array of pure JS objects
-            const data = snapshot.docs.map(doc => doc.data());
-            const latest= data[data.length - 1];
+            const latestRes = await fetch('/beef/latest');
+            if (!latestRes.ok) throw new Error(`Failed to fetch beef_latest: ${latestRes.statusText}`);
+            const latest = await latestRes.json();
 
-            //const url = `traffic_data.json`;
-            //const response = await fetch(url);
-            //const data = await response.json();
+            const countsRes = await fetch('/beef/counts');
+            if (!countsRes.ok) throw new Error(`Failed to fetch beef_counts: ${countsRes.statusText}`);
+            const data = await countsRes.json();
+
             const formattedTimestamp = formatTimestamp(latest.to_timestamp);
             const contentDiv = document.getElementById('content');
             contentDiv.innerHTML = `
