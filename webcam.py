@@ -9,9 +9,9 @@ import requests
 import keyboard
 from zoneinfo import ZoneInfo
 from environ import weather_api_key, location
-from google.cloud import firestore
 import firebase_admin
 from firebase_admin import credentials
+from firebase_admin import firestore
 
 cred = credentials.Certificate("serviceAccountKey.json")
 firebase_admin.initialize_app(cred)
@@ -41,7 +41,7 @@ LINGER_THRESHOLD_FRAMES = 30
 LINGER_DISTANCE_THRESHOLD = 40  
 VEHICLE_MOVE_THRESHOLD = 40
 chicago_tz = ZoneInfo("America/Chicago")
-db = firestore.Client()
+db = firestore.client()
 
 from_time = datetime.now(chicago_tz).replace(microsecond=0)
 next_save_time = from_time + timedelta(minutes=15)
