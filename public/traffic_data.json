@@ -8764,5 +8764,185 @@
       "description": "overcast clouds",
       "humidity": 79
     }
+  },
+  {
+    "from_timestamp": "2025-01-11T22:54:42-06:00",
+    "to_timestamp": "2025-01-11T23:09:42-06:00",
+    "counts": {
+      "people": 5,
+      "cyclists": 0,
+      "northbound_traffic": 50,
+      "southbound_traffic": 32,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 27.88,
+      "feels_like": 15.28,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 80
+    }
+  },
+  {
+    "from_timestamp": "2025-01-11T23:09:42-06:00",
+    "to_timestamp": "2025-01-11T23:24:42-06:00",
+    "counts": {
+      "people": 8,
+      "cyclists": 0,
+      "northbound_traffic": 46,
+      "southbound_traffic": 32,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 28,
+      "feels_like": 15.4,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 79
+    }
+  },
+  {
+    "from_timestamp": "2025-01-11T23:24:42-06:00",
+    "to_timestamp": "2025-01-11T23:39:42-06:00",
+    "counts": {
+      "people": 0,
+      "cyclists": 0,
+      "northbound_traffic": 45,
+      "southbound_traffic": 39,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 27.9,
+      "feels_like": 15.58,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 80
+    }
+  },
+  {
+    "from_timestamp": "2025-01-11T23:39:42-06:00",
+    "to_timestamp": "2025-01-11T23:54:42-06:00",
+    "counts": {
+      "people": 2,
+      "cyclists": 0,
+      "northbound_traffic": 47,
+      "southbound_traffic": 39,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 27.88,
+      "feels_like": 16.3,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 80
+    }
+  },
+  {
+    "from_timestamp": "2025-01-11T23:54:42-06:00",
+    "to_timestamp": "2025-01-12T00:09:42-06:00",
+    "counts": {
+      "people": 1,
+      "cyclists": 0,
+      "northbound_traffic": 55,
+      "southbound_traffic": 41,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 28.04,
+      "feels_like": 16.52,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 80
+    }
+  },
+  {
+    "from_timestamp": "2025-01-12T00:09:42-06:00",
+    "to_timestamp": "2025-01-12T00:24:42-06:00",
+    "counts": {
+      "people": 3,
+      "cyclists": 0,
+      "northbound_traffic": 40,
+      "southbound_traffic": 25,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 27.99,
+      "feels_like": 16.45,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 80
+    }
+  },
+  {
+    "from_timestamp": "2025-01-12T00:24:42-06:00",
+    "to_timestamp": "2025-01-12T00:39:42-06:00",
+    "counts": {
+      "people": 1,
+      "cyclists": 0,
+      "northbound_traffic": 34,
+      "southbound_traffic": 30,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 28.45,
+      "feels_like": 16.66,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 81
+    }
+  },
+  {
+    "from_timestamp": "2025-01-12T00:39:42-06:00",
+    "to_timestamp": "2025-01-12T00:54:42-06:00",
+    "counts": {
+      "people": 3,
+      "cyclists": 0,
+      "northbound_traffic": 40,
+      "southbound_traffic": 12,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 28.54,
+      "feels_like": 16.09,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 81
+    }
+  },
+  {
+    "from_timestamp": "2025-01-12T00:54:42-06:00",
+    "to_timestamp": "2025-01-12T01:09:42-06:00",
+    "counts": {
+      "people": 3,
+      "cyclists": 0,
+      "northbound_traffic": 32,
+      "southbound_traffic": 23,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 28.56,
+      "feels_like": 16.45,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 81
+    }
+  },
+  {
+    "from_timestamp": "2025-01-12T01:09:42-06:00",
+    "to_timestamp": "2025-01-12T01:24:42-06:00",
+    "counts": {
+      "people": 0,
+      "cyclists": 0,
+      "northbound_traffic": 38,
+      "southbound_traffic": 17,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 28.56,
+      "feels_like": 16.45,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 81
+    }
   }
 ]
