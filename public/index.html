@@ -249,6 +249,7 @@
                 const currentTime = new Date(data[i].to_timestamp).getTime();
                 const previousTime = new Date(data[i-1].from_timestamp).getTime();
                 const gap = currentTime - previousTime;
+                console.log(i, currentTime, previousTime, gap);
                 if (gap > 5 * 60_000) {
                     annotationObjects[`missingData${i}`] = {
                     type: 'box',
