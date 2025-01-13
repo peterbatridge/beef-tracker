@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Beef Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment-timezone@0.5.31/builds/moment-timezone-with-data.min.js"></script>
@@ -106,6 +106,7 @@
         right: -50px;
         max-height: 200%;
         width: auto;
+        display: none;
     }
 
     @keyframes spin {
@@ -119,55 +120,239 @@
     .rotate {
       animation: spin 1s linear;
     }
+
+
+    .whack-beef {
+      position: absolute;
+      transition: width 2s, height 2s;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none; 
+      -ms-user-select: none; 
+      cursor: pointer;
+    }
+    .life-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+}
+
+    .life-container img {
+      width: 30px;
+      height: auto;
+      margin: 0 5px;
+    }
+
+    .scoreboard {
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <div id="background"></div>
-    <h1>
+    <h1 id="mainHeader">
         BEEF-O-METER
-        <img id="jawImg" src="" alt="jaw image" />
+        <img id="jawImg" src="" alt="jeremy allen white" />
     </h1>
-    <img id="jawImg" src="" alt="jaw image" style="display: none;" />
     <div id="content">How much beef can you eat?
         <button id="feelingBeefy">I'm Feeling Beefy</button>
     </div>
     <div id="graph">
+        loading...
         <canvas id="trafficChart"></canvas>
     </div>
     <div id="foreground"></div>
 
     <script type="module">
-        const beefyBtn = document.getElementById('feelingBeefy');
-        beefyBtn.addEventListener('click', () => {
-            const beefImg = document.createElement('img');
-            beefImg.src = 'italianbeef.webp';
-            beefImg.alt = 'Italian Beef';
-            beefImg.classList.add('rotate');
-            beefyBtn.replaceWith(beefImg);
+        const mainHeader = document.getElementById('mainHeader');
+        const contentDiv = document.getElementById('content');
+        const graphDiv   = document.getElementById('graph');
+        const jawImg     = document.getElementById('jawImg');
+        const foreground = document.getElementById('foreground');
+        /*******************
+         * WHACK-A-BEEF GAME
+         *******************/
+        let gameInterval = null;
+        let speedInterval = null;
+        let spawnSpeed = 2000;
+        let score = 0;
+        let lives = 4;
+        let gameActive = false;
+        let activeBeefTimeouts = [];
+        let storedHighScore = parseInt(localStorage.getItem('beefHighScore') || '0');
+
+
+        function startWhackABeefGame() {
+        if (gameActive) return;
+            gameActive = true;
+            contentDiv.style.display = 'none';
+            graphDiv.style.display   = 'none';
+            jawImg.style.display     = 'none';
+            foreground.style.display = 'none';
+
+            mainHeader.textContent = 'Whack-A-Beef!';
+            const scoreElem = document.createElement('h2');
+            scoreElem.id = 'scoreBoard';
+            scoreElem.classList.add('scoreboard');
+            scoreElem.textContent = `Highscore: ${storedHighScore} — Score: 0`;
+            mainHeader.insertAdjacentElement('afterend', scoreElem);
+
+            const lifeContainer = document.createElement('div');
+            lifeContainer.classList.add('life-container');
+            scoreElem.insertAdjacentElement('afterend', lifeContainer);
+
+            const livesDiv = document.createElement('div');
+            livesDiv.id = 'livesDisplay';
+            lifeContainer.appendChild(livesDiv);
+
+            updateLivesDisplay();
+            score = 0;
+            spawnSpeed = 2000;
+
+            gameInterval = setInterval(spawnBeef, spawnSpeed);
+
+            speedInterval = setInterval(() => {
+                spawnSpeed = Math.max(400, spawnSpeed - 300); 
+                if (gameInterval) {
+                clearInterval(gameInterval);
+                gameInterval = setInterval(spawnBeef, spawnSpeed);
+                }
+            }, 15000);
+        }
+
+        function spawnBeef() {
+            const beef = document.createElement('img');
+            beef.src = 'italianbeef.webp';
+            beef.classList.add('whack-beef');
+            beef.draggable = false;
+            beef.style.width = '0px';
+            beef.style.height = '0px';
+
+            const maxX = window.innerWidth  - 70;
+            const maxY = window.innerHeight - 70;
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            beef.style.left = randomX + 'px';
+            beef.style.top  = randomY + 'px';
+
+            document.body.appendChild(beef);
+
+            requestAnimationFrame(() => {
+                beef.style.width = '41px';
+                beef.style.height = '61px';
+            });
+
+            const vanishTimer = setTimeout(() => {
+                if (beef.parentElement) {
+                    document.body.removeChild(beef);
+                    updateLives(-1);
+                }
+                activeBeefTimeouts = activeBeefTimeouts.filter(timeout => timeout !== vanishTimer);
+            }, 3000);
+
+            activeBeefTimeouts.push(vanishTimer);
+
+            beef.addEventListener('click', () => {
+                clearTimeout(vanishTimer);
+                activeBeefTimeouts = activeBeefTimeouts.filter(timeout => timeout !== vanishTimer);
+                if (beef.parentElement) {
+                    document.body.removeChild(beef);
+                }
+                updateScore(1);
+            });
+        }
+
+        function updateScore(delta) {
+            score += delta;
+            if (score > storedHighScore) {
+                storedHighScore = score;
+                localStorage.setItem('beefHighScore', storedHighScore);
+            }
+            if (delta > 0 && lives < 4) {
+                updateLives(1);
+            }
+            const scoreBoard = document.getElementById('scoreBoard');
+            if (scoreBoard) {
+                scoreBoard.textContent = `Highscore: ${storedHighScore} — Score: ${score}`;
+            }
+        }
+
+        function updateLives(delta) {
+            lives += delta;
+            if (lives <= 0) {
+                endWhackABeefGame();
+            } else {
+                updateLivesDisplay();
+            }
+        }
+
+        function updateLivesDisplay() {
+            const livesDisplay = document.getElementById('livesDisplay');
+            if (livesDisplay) {
+                livesDisplay.innerHTML = '';
+                for (let i = 0; i < lives; i++) {
+                    const lifeImg = document.createElement('img');
+                    lifeImg.src = 'chicagostar.webp';
+                    lifeImg.classList.add('life-icon');
+                    livesDisplay.appendChild(lifeImg);
+                }
+            }
+        }
+
+        function endWhackABeefGame() {
+            clearInterval(gameInterval);
+            clearInterval(speedInterval);
+            activeBeefTimeouts.forEach(timeout => clearTimeout(timeout));
+            activeBeefTimeouts = [];
+            gameInterval = null;
+            speedInterval = null;
+            gameActive = false;
+
+            document.querySelectorAll('.whack-beef').forEach(el => el.remove());
+            const scoreBoard = document.getElementById('scoreBoard');
+            if (scoreBoard) scoreBoard.remove();
+            const livesDisplay = document.getElementById('livesDisplay');
+            if (livesDisplay) livesDisplay.remove();
+
+            mainHeader.textContent = 'BEEF-O-METER';
+            contentDiv.style.display = '';
+            graphDiv.style.display   = '';
+            foreground.style.display = '';
+            loadTrafficData(); 
+        }
+
+        document.getElementById('feelingBeefy').addEventListener('click', () => {
+                startWhackABeefGame();
         });
 
         function decideJawImage(latest) {
-        const nowChicago = moment().tz("America/Chicago");
-        const day = nowChicago.day();
-        const hour = nowChicago.hour();
-        const people = latest.counts.people;
-        const inRange = (day >= 1 && day <= 6 && hour >= 10 && hour < 16);
-        let jawSrc = '';
-        if (!inRange || people > 200) {
-            jawSrc = 'jawbad.webp';
-        } else if (people > 75 && people <= 200) {
-            jawSrc = 'jawokay.webp';
-        } else {
-            jawSrc = 'jawgood.webp';
-        }
+            const nowChicago = moment().tz("America/Chicago");
+            const day = nowChicago.day();
+            const hour = nowChicago.hour();
+            const people = latest.counts.people;
+            const inRange = (day >= 1 && day <= 6 && hour >= 10 && hour < 16);
+            let jawSrc = '';
+            if (!inRange || people > 200) {
+                jawSrc = 'jawbad.webp';
+            } else if (people > 75 && people <= 200) {
+                jawSrc = 'jawokay.webp';
+            } else {
+                jawSrc = 'jawgood.webp';
+            }
 
-        const jawImg = document.getElementById('jawImg');
-        if (jawSrc) {
-            jawImg.src = jawSrc;
-            jawImg.style.display = 'block';
-        } else {
-            jawImg.style.display = 'none';
-        }
+            const jawImg = document.getElementById('jawImg');
+            if (jawSrc) {
+                jawImg.src = jawSrc;
+                jawImg.style.display = 'block';
+            } else {
+                jawImg.style.display = 'none';
+            }
         }
 
         function addZeroDataPointAtNearestSixHour(data) {
@@ -176,7 +361,7 @@
 
             const roundedDate = new Date(earliestDate);
             const currentHour = roundedDate.getHours();
-            const newHourMultiple = Math.floor(currentHour / 6) * 6; // e.g. 1.7 => 1, then *6 => 6
+            const newHourMultiple = Math.floor(currentHour / 6) * 6;
             roundedDate.setHours(newHourMultiple, 0, 0, 0);
 
             if (roundedDate < earliestDate) {
@@ -231,16 +416,16 @@
                 <p><span class="highlight">Southbound Traffic:</span> ${latest.counts.southbound_traffic}</p>
                 <p><span class="highlight">Weather:</span> ${latest.weather.main} (${latest.weather.description}), ${latest.weather.temp}°F (Feels like: ${latest.weather.feels_like}°F), Humidity: ${latest.weather.humidity}%</p>
             `;
+            if (storedHighScore > 0) {
+                contentDiv.insertAdjacentHTML('beforeend',
+                    `<p>Your High Score: ${storedHighScore}</p>`
+                );
+            }
+
             const beefyBtnHtml = `<button id="feelingBeefy">I'm Feeling Beefy</button>`;
             contentDiv.insertAdjacentHTML('beforeend', beefyBtnHtml);
-
-            // Re-attach the beefy button event listener
             document.getElementById('feelingBeefy').addEventListener('click', () => {
-                const beefImg = document.createElement('img');
-                beefImg.src = 'italianbeef.webp';
-                beefImg.alt = 'Italian Beef';
-                beefImg.classList.add('rotate');
-                document.getElementById('feelingBeefy').replaceWith(beefImg);
+                startWhackABeefGame();
             });
 
             decideJawImage(latest);
