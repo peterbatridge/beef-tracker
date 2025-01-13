@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Beef Tracker</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+    <meta property="og:title" content="Beef Tracker" />
+    <meta property="og:description" content="Check the line before you beef" />
+    <meta property="og:image" content="beefannotated.webp" />
+    <meta property="og:url" content="https://peter.dev" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Beef Tracker">
+    <meta name="twitter:description" content="Check the line before you beef">
+    <meta name="twitter:image" content="beefannotated.webp">
+
+
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment-timezone@0.5.31/builds/moment-timezone-with-data.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -251,8 +263,10 @@
             document.body.appendChild(beef);
 
             requestAnimationFrame(() => {
-                beef.style.width = '41px';
-                beef.style.height = '61px';
+                requestAnimationFrame(() => {
+                    beef.style.width  = '41px';
+                    beef.style.height = '61px';
+                });
             });
 
             const vanishTimer = setTimeout(() => {
