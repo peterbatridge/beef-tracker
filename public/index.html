@@ -28,6 +28,10 @@
             background: black;
             color: white;
             position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none; 
+            -ms-user-select: none; 
         }
 
         #background, #foreground {
@@ -72,6 +76,7 @@
             width: 80%;
             height: 400px;
             background-color: rgba(255, 255, 255, 0.9);
+            color: black;
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -124,7 +129,7 @@
 
     .whack-beef {
       position: absolute;
-      transition: width 2s, height 2s;
+      transition: width 0.6s ease-out, height 0.6s ease-out;
       user-select: none;
       -webkit-user-select: none;
       -moz-user-select: none; 
@@ -164,7 +169,7 @@
         <button id="feelingBeefy">I'm Feeling Beefy</button>
     </div>
     <div id="graph">
-        loading...
+        <span id="graphLoadingText">loading...</span>
         <canvas id="trafficChart"></canvas>
     </div>
     <div id="foreground"></div>
@@ -175,6 +180,8 @@
         const graphDiv   = document.getElementById('graph');
         const jawImg     = document.getElementById('jawImg');
         const foreground = document.getElementById('foreground');
+        const graphLoadingText = document.getElementById('graphLoadingText');
+
         /*******************
          * WHACK-A-BEEF GAME
          *******************/
@@ -200,7 +207,7 @@
             const scoreElem = document.createElement('h2');
             scoreElem.id = 'scoreBoard';
             scoreElem.classList.add('scoreboard');
-            scoreElem.textContent = `Highscore: ${storedHighScore} — Score: 0`;
+            scoreElem.textContent = `High score: ${storedHighScore} — Score: 0`;
             mainHeader.insertAdjacentElement('afterend', scoreElem);
 
             const lifeContainer = document.createElement('div');
@@ -218,12 +225,12 @@
             gameInterval = setInterval(spawnBeef, spawnSpeed);
 
             speedInterval = setInterval(() => {
-                spawnSpeed = Math.max(400, spawnSpeed - 300); 
+                spawnSpeed = Math.max(100, spawnSpeed - 300); 
                 if (gameInterval) {
                 clearInterval(gameInterval);
                 gameInterval = setInterval(spawnBeef, spawnSpeed);
                 }
-            }, 15000);
+            }, 10000);
         }
 
         function spawnBeef() {
@@ -279,7 +286,7 @@
             }
             const scoreBoard = document.getElementById('scoreBoard');
             if (scoreBoard) {
-                scoreBoard.textContent = `Highscore: ${storedHighScore} — Score: ${score}`;
+                scoreBoard.textContent = `High score: ${storedHighScore} — Score: ${score}`;
             }
         }
 
@@ -397,6 +404,7 @@
             return `${hours}:${minutes} ${ampm} on ${formattedDate}`;
         }
         async function loadTrafficData() {
+            graphLoadingText.textContent = 'loading...';
             const latestRes = await fetch('/beef/latest');
             if (!latestRes.ok) throw new Error(`Failed to fetch beef_latest: ${latestRes.statusText}`);
             const latest = await latestRes.json();
@@ -446,6 +454,7 @@
                 }
             }
 
+            graphDiv.innerHTML = '<canvas id="trafficChart"></canvas>';
             const ctx = document.getElementById('trafficChart').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
