@@ -93,6 +93,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
         }
         canvas {
             width: 100%;
@@ -202,6 +203,7 @@
         let spawnSpeed = 2000;
         let score = 0;
         let lives = 4;
+        let lastScore = 0;
         let gameActive = false;
         let activeBeefTimeouts = [];
         let storedHighScore = parseInt(localStorage.getItem('beefHighScore') || '0');
@@ -215,7 +217,7 @@
             jawImg.style.display     = 'none';
             foreground.style.display = 'none';
 
-            mainHeader.textContent = 'Whack-A-Beef!';
+            mainHeader.textContent = 'WHACK-A-BEEF!<br>Last Score: ' + lastScore;
             const scoreElem = document.createElement('h2');
             scoreElem.id = 'scoreBoard';
             scoreElem.classList.add('scoreboard');
@@ -309,6 +311,7 @@
             lives += delta;
             if (lives <= 0) {
                 endWhackABeefGame();
+                lastScore = score;
             } else {
                 updateLivesDisplay();
             }
@@ -442,6 +445,11 @@
             if (storedHighScore > 0) {
                 contentDiv.insertAdjacentHTML('beforeend',
                     `<p>Your High Score: ${storedHighScore}</p>`
+                );
+            }
+            if (lastScore > 0) {
+                contentDiv.insertAdjacentHTML('beforeend',
+                    `<p>Your Last Score: ${lastScore}</p>`
                 );
             }
 
