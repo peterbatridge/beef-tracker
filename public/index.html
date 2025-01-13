@@ -217,7 +217,7 @@
             jawImg.style.display     = 'none';
             foreground.style.display = 'none';
 
-            mainHeader.textContent = 'WHACK-A-BEEF!<br>Last Score: ' + lastScore;
+            mainHeader.textContent = 'WHACK-A-BEEF!';
             const scoreElem = document.createElement('h2');
             scoreElem.id = 'scoreBoard';
             scoreElem.classList.add('scoreboard');
@@ -232,10 +232,10 @@
             livesDiv.id = 'livesDisplay';
             lifeContainer.appendChild(livesDiv);
 
-            updateLivesDisplay();
             score = 0;
             lives = 4;
             spawnSpeed = 2000;
+            updateLivesDisplay();
 
             gameInterval = setInterval(spawnBeef, spawnSpeed);
 
