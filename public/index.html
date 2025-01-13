@@ -28,7 +28,17 @@
             padding: 0;
             box-sizing: border-box;
         }
+        a {
+            color: #ff006e;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
 
+        a:hover, a:focus {
+            color: #f72585;
+            text-shadow: 0 0 8px rgba(255, 0, 110, 0.8);
+        }
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -182,7 +192,7 @@
         <button id="feelingBeefy">I'm Feeling Beefy</button>
     </div>
     <div id="graph">
-        <span id="graphLoadingText">loading...</span>
+        <p id="graphLoadingText"></p>
         <canvas id="trafficChart"></canvas>
     </div>
     <div id="foreground"></div>
@@ -435,9 +445,9 @@
             const contentDiv = document.getElementById('content');
             contentDiv.innerHTML = `
                 <h2>Last 15 minutes as of <span class="highlight">${formattedTimestamp}</span></h2>
-                <p><span class="highlight">People:</span> ${latest.counts.people}</p>
-                <p><span class="highlight">People Lingering:</span> ${latest.counts.people_lingering}</p>
-                <p><span class="highlight">Cyclists:</span> ${latest.counts.cyclists}</p>
+                <p><span class="highlight">Pedestrians:</span> ${latest.counts.people}</p>
+                <p><span class="highlight">Pedestrians Lingering:</span> ${latest.counts.people_lingering}</p>
+                <a href='https://chud.dev'><span class="highlight">Cyclists:</span> ${latest.counts.cyclists}</a>
                 <p><span class="highlight">Northbound Traffic:</span> ${latest.counts.northbound_traffic}</p>
                 <p><span class="highlight">Southbound Traffic:</span> ${latest.counts.southbound_traffic}</p>
                 <p><span class="highlight">Weather:</span> ${latest.weather.main} (${latest.weather.description}), ${latest.weather.temp}°F (Feels like: ${latest.weather.feels_like}°F), Humidity: ${latest.weather.humidity}%</p>
@@ -489,7 +499,7 @@
                             backgroundColor: 'rgba(255, 99, 132, 0.8)'
                         },
                         {
-                            label: 'People',
+                            label: 'Pedestrians',
                             data: data.map(entry => ({ x: new Date(entry.from_timestamp), y: entry.counts.people })),
                             backgroundColor: 'rgba(54, 162, 235, 0.8)'
                         },
