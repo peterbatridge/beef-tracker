@@ -12706,5 +12706,23 @@
       "description": "mist",
       "humidity": 85
     }
+  },
+  {
+    "from_timestamp": "2025-01-14T06:29:37-06:00",
+    "to_timestamp": "2025-01-14T06:44:37-06:00",
+    "counts": {
+      "people": 2,
+      "cyclists": 1,
+      "northbound_traffic": 63,
+      "southbound_traffic": 29,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 15.82,
+      "feels_like": 3.22,
+      "main": "Mist",
+      "description": "mist",
+      "humidity": 85
+    }
   }
 ]
