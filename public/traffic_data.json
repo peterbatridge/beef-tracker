@@ -23956,5 +23956,23 @@
       "description": "few clouds",
       "humidity": 55
     }
+  },
+  {
+    "from_timestamp": "2025-01-20T18:44:37-06:00",
+    "to_timestamp": "2025-01-20T18:59:37-06:00",
+    "counts": {
+      "people": 2,
+      "cyclists": 0,
+      "northbound_traffic": 72,
+      "southbound_traffic": 47,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 7.79,
+      "feels_like": -4.81,
+      "main": "Clouds",
+      "description": "few clouds",
+      "humidity": 55
+    }
   }
 ]
