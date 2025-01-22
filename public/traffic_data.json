@@ -26170,5 +26170,23 @@
       "description": "broken clouds",
       "humidity": 72
     }
+  },
+  {
+    "from_timestamp": "2025-01-22T01:29:37-06:00",
+    "to_timestamp": "2025-01-22T01:44:37-06:00",
+    "counts": {
+      "people": 0,
+      "cyclists": 0,
+      "northbound_traffic": 12,
+      "southbound_traffic": 1,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 0.18,
+      "feels_like": -12.42,
+      "main": "Clouds",
+      "description": "broken clouds",
+      "humidity": 72
+    }
   }
 ]
