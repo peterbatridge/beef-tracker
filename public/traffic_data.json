@@ -27610,5 +27610,23 @@
       "description": "mist",
       "humidity": 73
     }
+  },
+  {
+    "from_timestamp": "2025-01-22T21:29:37-06:00",
+    "to_timestamp": "2025-01-22T21:44:37-06:00",
+    "counts": {
+      "people": 2,
+      "cyclists": 0,
+      "northbound_traffic": 48,
+      "southbound_traffic": 17,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 23.7,
+      "feels_like": 11.48,
+      "main": "Snow",
+      "description": "light snow",
+      "humidity": 77
+    }
   }
 ]
