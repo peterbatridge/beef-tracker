@@ -37960,5 +37960,23 @@
       "description": "clear sky",
       "humidity": 51
     }
+  },
+  {
+    "from_timestamp": "2025-01-28T21:14:37-06:00",
+    "to_timestamp": "2025-01-28T21:29:37-06:00",
+    "counts": {
+      "people": 0,
+      "cyclists": 0,
+      "northbound_traffic": 81,
+      "southbound_traffic": 53,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 44.58,
+      "feels_like": 38.05,
+      "main": "Clear",
+      "description": "clear sky",
+      "humidity": 57
+    }
   }
 ]
