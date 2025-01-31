@@ -42694,5 +42694,23 @@
       "description": "light rain",
       "humidity": 95
     }
+  },
+  {
+    "from_timestamp": "2025-01-31T14:59:37-06:00",
+    "to_timestamp": "2025-01-31T15:14:37-06:00",
+    "counts": {
+      "people": 11,
+      "cyclists": 0,
+      "northbound_traffic": 123,
+      "southbound_traffic": 100,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 36.52,
+      "feels_like": 27.01,
+      "main": "Rain",
+      "description": "moderate rain",
+      "humidity": 94
+    }
   }
 ]
