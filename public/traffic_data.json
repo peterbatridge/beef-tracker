@@ -41992,5 +41992,23 @@
       "description": "fog",
       "humidity": 96
     }
+  },
+  {
+    "from_timestamp": "2025-01-31T05:14:37-06:00",
+    "to_timestamp": "2025-01-31T05:29:37-06:00",
+    "counts": {
+      "people": 0,
+      "cyclists": 0,
+      "northbound_traffic": 18,
+      "southbound_traffic": 9,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 38.91,
+      "feels_like": 32.65,
+      "main": "Fog",
+      "description": "fog",
+      "humidity": 96
+    }
   }
 ]
