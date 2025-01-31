@@ -42406,5 +42406,23 @@
       "description": "heavy intensity rain",
       "humidity": 96
     }
+  },
+  {
+    "from_timestamp": "2025-01-31T10:59:37-06:00",
+    "to_timestamp": "2025-01-31T11:14:37-06:00",
+    "counts": {
+      "people": 3,
+      "cyclists": 0,
+      "northbound_traffic": 105,
+      "southbound_traffic": 51,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 38.98,
+      "feels_like": 31.77,
+      "main": "Mist",
+      "description": "mist",
+      "humidity": 96
+    }
   }
 ]
