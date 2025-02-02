@@ -44800,5 +44800,23 @@
       "description": "overcast clouds",
       "humidity": 79
     }
+  },
+  {
+    "from_timestamp": "2025-02-01T20:14:37-06:00",
+    "to_timestamp": "2025-02-01T20:29:37-06:00",
+    "counts": {
+      "people": 6,
+      "cyclists": 0,
+      "northbound_traffic": 121,
+      "southbound_traffic": 78,
+      "people_lingering": 1
+    },
+    "weather": {
+      "temp": 32.31,
+      "feels_like": 21.6,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 78
+    }
   }
 ]
