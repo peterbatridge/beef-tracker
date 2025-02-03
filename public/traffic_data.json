@@ -47878,5 +47878,23 @@
       "description": "mist",
       "humidity": 95
     }
+  },
+  {
+    "from_timestamp": "2025-02-03T14:59:37-06:00",
+    "to_timestamp": "2025-02-03T15:14:37-06:00",
+    "counts": {
+      "people": 24,
+      "cyclists": 0,
+      "northbound_traffic": 102,
+      "southbound_traffic": 107,
+      "people_lingering": 4
+    },
+    "weather": {
+      "temp": 36.52,
+      "feels_like": 26.35,
+      "main": "Mist",
+      "description": "mist",
+      "humidity": 95
+    }
   }
 ]
