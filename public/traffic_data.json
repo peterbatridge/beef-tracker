@@ -51136,5 +51136,23 @@
       "description": "smoke",
       "humidity": 75
     }
+  },
+  {
+    "from_timestamp": "2025-02-05T12:14:37-06:00",
+    "to_timestamp": "2025-02-05T12:29:37-06:00",
+    "counts": {
+      "people": 54,
+      "cyclists": 11,
+      "northbound_traffic": 107,
+      "southbound_traffic": 70,
+      "people_lingering": 2
+    },
+    "weather": {
+      "temp": 28.29,
+      "feels_like": 18.93,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 74
+    }
   }
 ]
