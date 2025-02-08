@@ -56338,5 +56338,23 @@
       "description": "light intensity drizzle",
       "humidity": 66
     }
+  },
+  {
+    "from_timestamp": "2025-02-08T12:29:37-06:00",
+    "to_timestamp": "2025-02-08T12:44:37-06:00",
+    "counts": {
+      "people": 59,
+      "cyclists": 5,
+      "northbound_traffic": 116,
+      "southbound_traffic": 103,
+      "people_lingering": 9
+    },
+    "weather": {
+      "temp": 32.31,
+      "feels_like": 25.18,
+      "main": "Drizzle",
+      "description": "light intensity drizzle",
+      "humidity": 67
+    }
   }
 ]
