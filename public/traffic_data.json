@@ -58174,5 +58174,23 @@
       "description": "broken clouds",
       "humidity": 60
     }
+  },
+  {
+    "from_timestamp": "2025-02-09T13:59:37-06:00",
+    "to_timestamp": "2025-02-09T14:14:37-06:00",
+    "counts": {
+      "people": 34,
+      "cyclists": 0,
+      "northbound_traffic": 89,
+      "southbound_traffic": 89,
+      "people_lingering": 1
+    },
+    "weather": {
+      "temp": 30.83,
+      "feels_like": 27.39,
+      "main": "Clouds",
+      "description": "broken clouds",
+      "humidity": 59
+    }
   }
 ]
