@@ -66400,5 +66400,23 @@
       "description": "scattered clouds",
       "humidity": 77
     }
+  },
+  {
+    "from_timestamp": "2025-02-14T08:14:37-06:00",
+    "to_timestamp": "2025-02-14T08:29:37-06:00",
+    "counts": {
+      "people": 18,
+      "cyclists": 14,
+      "northbound_traffic": 106,
+      "southbound_traffic": 76,
+      "people_lingering": 1
+    },
+    "weather": {
+      "temp": 9.32,
+      "feels_like": 0.97,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 78
+    }
   }
 ]
