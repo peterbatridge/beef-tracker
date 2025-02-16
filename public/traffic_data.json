@@ -70198,5 +70198,23 @@
       "description": "light snow",
       "humidity": 74
     }
+  },
+  {
+    "from_timestamp": "2025-02-16T12:59:37-06:00",
+    "to_timestamp": "2025-02-16T13:14:37-06:00",
+    "counts": {
+      "people": 18,
+      "cyclists": 0,
+      "northbound_traffic": 110,
+      "southbound_traffic": 71,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 27.03,
+      "feels_like": 18.79,
+      "main": "Snow",
+      "description": "light snow",
+      "humidity": 74
+    }
   }
 ]
