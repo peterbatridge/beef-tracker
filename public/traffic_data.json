@@ -76102,5 +76102,23 @@
       "description": "overcast clouds",
       "humidity": 66
     }
+  },
+  {
+    "from_timestamp": "2025-02-19T22:59:37-06:00",
+    "to_timestamp": "2025-02-19T23:14:37-06:00",
+    "counts": {
+      "people": 0,
+      "cyclists": 0,
+      "northbound_traffic": 35,
+      "southbound_traffic": 33,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 9.82,
+      "feels_like": -2.78,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 66
+    }
   }
 ]
