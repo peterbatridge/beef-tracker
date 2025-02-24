@@ -83122,5 +83122,23 @@
       "description": "failed to get weather data",
       "humidity": 0
     }
+  },
+  {
+    "from_timestamp": "2025-02-24T00:29:37-06:00",
+    "to_timestamp": "2025-02-24T00:44:37-06:00",
+    "counts": {
+      "people": 0,
+      "cyclists": 0,
+      "northbound_traffic": 19,
+      "southbound_traffic": 13,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 38.64,
+      "feels_like": 30.11,
+      "main": "Clouds",
+      "description": "broken clouds",
+      "humidity": 76
+    }
   }
 ]
