@@ -89026,5 +89026,23 @@
       "description": "scattered clouds",
       "humidity": 74
     }
+  },
+  {
+    "from_timestamp": "2025-02-27T10:29:37-06:00",
+    "to_timestamp": "2025-02-27T10:44:37-06:00",
+    "counts": {
+      "people": 24,
+      "cyclists": 7,
+      "northbound_traffic": 98,
+      "southbound_traffic": 92,
+      "people_lingering": 1
+    },
+    "weather": {
+      "temp": 46.74,
+      "feels_like": 40.48,
+      "main": "Clouds",
+      "description": "scattered clouds",
+      "humidity": 72
+    }
   }
 ]
