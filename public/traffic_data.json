@@ -89710,5 +89710,23 @@
       "description": "few clouds",
       "humidity": 66
     }
+  },
+  {
+    "from_timestamp": "2025-02-27T19:59:37-06:00",
+    "to_timestamp": "2025-02-27T20:14:37-06:00",
+    "counts": {
+      "people": 12,
+      "cyclists": 0,
+      "northbound_traffic": 80,
+      "southbound_traffic": 76,
+      "people_lingering": 3
+    },
+    "weather": {
+      "temp": 41.32,
+      "feels_like": 39.87,
+      "main": "Clouds",
+      "description": "few clouds",
+      "humidity": 65
+    }
   }
 ]
