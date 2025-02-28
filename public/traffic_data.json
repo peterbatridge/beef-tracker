@@ -91222,5 +91222,23 @@
       "description": "broken clouds",
       "humidity": 35
     }
+  },
+  {
+    "from_timestamp": "2025-02-28T16:59:37-06:00",
+    "to_timestamp": "2025-02-28T17:14:37-06:00",
+    "counts": {
+      "people": 69,
+      "cyclists": 2,
+      "northbound_traffic": 126,
+      "southbound_traffic": 117,
+      "people_lingering": 5
+    },
+    "weather": {
+      "temp": 55.22,
+      "feels_like": 52.79,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 50
+    }
   }
 ]
