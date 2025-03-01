@@ -92302,5 +92302,23 @@
       "description": "scattered clouds",
       "humidity": 61
     }
+  },
+  {
+    "from_timestamp": "2025-03-01T07:59:37-06:00",
+    "to_timestamp": "2025-03-01T08:14:37-06:00",
+    "counts": {
+      "people": 5,
+      "cyclists": 1,
+      "northbound_traffic": 64,
+      "southbound_traffic": 40,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 24.37,
+      "feels_like": 14.27,
+      "main": "Clouds",
+      "description": "scattered clouds",
+      "humidity": 61
+    }
   }
 ]
