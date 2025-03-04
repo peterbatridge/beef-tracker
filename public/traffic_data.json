@@ -97612,5 +97612,23 @@
       "description": "overcast clouds",
       "humidity": 82
     }
+  },
+  {
+    "from_timestamp": "2025-03-04T09:44:37-06:00",
+    "to_timestamp": "2025-03-04T09:59:37-06:00",
+    "counts": {
+      "people": 40,
+      "cyclists": 0,
+      "northbound_traffic": 119,
+      "southbound_traffic": 69,
+      "people_lingering": 10
+    },
+    "weather": {
+      "temp": 46.89,
+      "feels_like": 40.41,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 81
+    }
   }
 ]
