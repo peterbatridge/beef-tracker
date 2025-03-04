@@ -97360,5 +97360,23 @@
       "description": "heavy intensity rain",
       "humidity": 82
     }
+  },
+  {
+    "from_timestamp": "2025-03-04T06:14:37-06:00",
+    "to_timestamp": "2025-03-04T06:29:37-06:00",
+    "counts": {
+      "people": 0,
+      "cyclists": 0,
+      "northbound_traffic": 66,
+      "southbound_traffic": 44,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 44.91,
+      "feels_like": 38.14,
+      "main": "Thunderstorm",
+      "description": "thunderstorm",
+      "humidity": 86
+    }
   }
 ]
