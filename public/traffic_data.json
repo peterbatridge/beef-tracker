@@ -99898,5 +99898,23 @@
       "description": "light snow",
       "humidity": 89
     }
+  },
+  {
+    "from_timestamp": "2025-03-05T17:29:37-06:00",
+    "to_timestamp": "2025-03-05T17:44:37-06:00",
+    "counts": {
+      "people": 19,
+      "cyclists": 0,
+      "northbound_traffic": 129,
+      "southbound_traffic": 69,
+      "people_lingering": 1
+    },
+    "weather": {
+      "temp": 32.92,
+      "feels_like": 29.14,
+      "main": "Snow",
+      "description": "light snow",
+      "humidity": 89
+    }
   }
 ]
