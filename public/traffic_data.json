@@ -98206,5 +98206,23 @@
       "description": "moderate rain",
       "humidity": 84
     }
+  },
+  {
+    "from_timestamp": "2025-03-04T17:59:37-06:00",
+    "to_timestamp": "2025-03-04T18:14:37-06:00",
+    "counts": {
+      "people": 6,
+      "cyclists": 0,
+      "northbound_traffic": 105,
+      "southbound_traffic": 96,
+      "people_lingering": 1
+    },
+    "weather": {
+      "temp": 46.13,
+      "feels_like": 44.4,
+      "main": "Rain",
+      "description": "moderate rain",
+      "humidity": 84
+    }
   }
 ]
