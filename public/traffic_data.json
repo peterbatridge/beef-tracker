@@ -101482,5 +101482,23 @@
       "description": "few clouds",
       "humidity": 46
     }
+  },
+  {
+    "from_timestamp": "2025-03-06T15:29:37-06:00",
+    "to_timestamp": "2025-03-06T15:44:37-06:00",
+    "counts": {
+      "people": 23,
+      "cyclists": 0,
+      "northbound_traffic": 106,
+      "southbound_traffic": 139,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 41.09,
+      "feels_like": 34.84,
+      "main": "Clouds",
+      "description": "few clouds",
+      "humidity": 45
+    }
   }
 ]
