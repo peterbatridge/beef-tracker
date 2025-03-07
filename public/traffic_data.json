@@ -102904,5 +102904,23 @@
       "description": "light rain",
       "humidity": 80
     }
+  },
+  {
+    "from_timestamp": "2025-03-07T11:14:37-06:00",
+    "to_timestamp": "2025-03-07T11:29:37-06:00",
+    "counts": {
+      "people": 21,
+      "cyclists": 1,
+      "northbound_traffic": 144,
+      "southbound_traffic": 71,
+      "people_lingering": 1
+    },
+    "weather": {
+      "temp": 37.62,
+      "feels_like": 33.1,
+      "main": "Rain",
+      "description": "moderate rain",
+      "humidity": 79
+    }
   }
 ]
