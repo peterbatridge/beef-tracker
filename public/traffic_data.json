@@ -104920,5 +104920,23 @@
       "description": "few clouds",
       "humidity": 52
     }
+  },
+  {
+    "from_timestamp": "2025-03-08T15:14:37-06:00",
+    "to_timestamp": "2025-03-08T15:29:37-06:00",
+    "counts": {
+      "people": 131,
+      "cyclists": 8,
+      "northbound_traffic": 108,
+      "southbound_traffic": 118,
+      "people_lingering": 27
+    },
+    "weather": {
+      "temp": 49.95,
+      "feels_like": 45.18,
+      "main": "Clouds",
+      "description": "few clouds",
+      "humidity": 52
+    }
   }
 ]
