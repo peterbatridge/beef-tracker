@@ -103426,5 +103426,23 @@
       "description": "light intensity drizzle",
       "humidity": 91
     }
+  },
+  {
+    "from_timestamp": "2025-03-07T18:29:37-06:00",
+    "to_timestamp": "2025-03-07T18:44:37-06:00",
+    "counts": {
+      "people": 7,
+      "cyclists": 0,
+      "northbound_traffic": 123,
+      "southbound_traffic": 81,
+      "people_lingering": 1
+    },
+    "weather": {
+      "temp": 34.41,
+      "feels_like": 28.45,
+      "main": "Drizzle",
+      "description": "light intensity drizzle",
+      "humidity": 92
+    }
   }
 ]
