@@ -108592,5 +108592,23 @@
       "description": "clear sky",
       "humidity": 36
     }
+  },
+  {
+    "from_timestamp": "2025-03-10T19:09:27-05:00",
+    "to_timestamp": "2025-03-10T19:24:27-05:00",
+    "counts": {
+      "people": 11,
+      "cyclists": 0,
+      "northbound_traffic": 87,
+      "southbound_traffic": 69,
+      "people_lingering": 3
+    },
+    "weather": {
+      "temp": 64.92,
+      "feels_like": 63.23,
+      "main": "Clouds",
+      "description": "broken clouds",
+      "humidity": 45
+    }
   }
 ]
