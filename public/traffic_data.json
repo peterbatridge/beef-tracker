@@ -111814,5 +111814,23 @@
       "description": "smoke",
       "humidity": 45
     }
+  },
+  {
+    "from_timestamp": "2025-03-12T15:54:27-05:00",
+    "to_timestamp": "2025-03-12T16:09:27-05:00",
+    "counts": {
+      "people": 101,
+      "cyclists": 3,
+      "northbound_traffic": 160,
+      "southbound_traffic": 168,
+      "people_lingering": 29
+    },
+    "weather": {
+      "temp": 47.25,
+      "feels_like": 42.49,
+      "main": "Smoke",
+      "description": "smoke",
+      "humidity": 44
+    }
   }
 ]
