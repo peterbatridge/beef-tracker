@@ -110356,5 +110356,23 @@
       "description": "broken clouds",
       "humidity": 70
     }
+  },
+  {
+    "from_timestamp": "2025-03-11T19:39:27-05:00",
+    "to_timestamp": "2025-03-11T19:54:27-05:00",
+    "counts": {
+      "people": 4,
+      "cyclists": 0,
+      "northbound_traffic": 66,
+      "southbound_traffic": 74,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 36.57,
+      "feels_like": 29.88,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 71
+    }
   }
 ]
