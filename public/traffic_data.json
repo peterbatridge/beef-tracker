@@ -114244,5 +114244,23 @@
       "description": "scattered clouds",
       "humidity": 68
     }
+  },
+  {
+    "from_timestamp": "2025-03-14T01:39:27-05:00",
+    "to_timestamp": "2025-03-14T01:54:27-05:00",
+    "counts": {
+      "people": 0,
+      "cyclists": 0,
+      "northbound_traffic": 11,
+      "southbound_traffic": 11,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 50.81,
+      "feels_like": 48.79,
+      "main": "Clouds",
+      "description": "scattered clouds",
+      "humidity": 68
+    }
   }
 ]
