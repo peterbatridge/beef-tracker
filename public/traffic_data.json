@@ -116008,5 +116008,23 @@
       "description": "heavy intensity rain",
       "humidity": 90
     }
+  },
+  {
+    "from_timestamp": "2025-03-15T02:09:27-05:00",
+    "to_timestamp": "2025-03-15T02:24:27-05:00",
+    "counts": {
+      "people": 1,
+      "cyclists": 0,
+      "northbound_traffic": 31,
+      "southbound_traffic": 23,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 55,
+      "feels_like": 54.48,
+      "main": "Thunderstorm",
+      "description": "thunderstorm",
+      "humidity": 91
+    }
   }
 ]
