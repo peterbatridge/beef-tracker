@@ -117988,5 +117988,23 @@
       "description": "smoke",
       "humidity": 52
     }
+  },
+  {
+    "from_timestamp": "2025-03-18T15:22:53-05:00",
+    "to_timestamp": "2025-03-18T15:37:53-05:00",
+    "counts": {
+      "people": 0,
+      "cyclists": 0,
+      "northbound_traffic": 0,
+      "southbound_traffic": 0,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 70.48,
+      "feels_like": 69.73,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "humidity": 53
+    }
   }
 ]
