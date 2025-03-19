@@ -119914,5 +119914,23 @@
       "description": "extreme rain",
       "humidity": 96
     }
+  },
+  {
+    "from_timestamp": "2025-03-19T18:07:53-05:00",
+    "to_timestamp": "2025-03-19T18:22:53-05:00",
+    "counts": {
+      "people": 12,
+      "cyclists": 0,
+      "northbound_traffic": 0,
+      "southbound_traffic": 0,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 41.95,
+      "feels_like": 38.25,
+      "main": "Rain",
+      "description": "moderate rain",
+      "humidity": 98
+    }
   }
 ]
