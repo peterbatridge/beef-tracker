@@ -120760,5 +120760,23 @@
       "description": "snow",
       "humidity": 95
     }
+  },
+  {
+    "from_timestamp": "2025-03-20T05:52:53-05:00",
+    "to_timestamp": "2025-03-20T06:07:53-05:00",
+    "counts": {
+      "people": 0,
+      "cyclists": 0,
+      "northbound_traffic": 0,
+      "southbound_traffic": 0,
+      "people_lingering": 0
+    },
+    "weather": {
+      "temp": 32.43,
+      "feels_like": 21.76,
+      "main": "Snow",
+      "description": "snow",
+      "humidity": 94
+    }
   }
 ]
